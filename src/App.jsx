@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import droneHero from './assets/drone-hero.png'
 
 function Section({ id, title, children }) {
   return (
@@ -58,8 +59,7 @@ function Hero() {
             muted
             loop
             playsInline
-            // poster="https://images.unsplash.com/photo-1504194104404-433180773017?q=80&w=1200&auto=format&fit=crop"
-            poster="assets/drone-hero.png"
+            poster={droneHero}
           >
             <source src="https://cdn.coverr.co/videos/coverr-drone-over-construction-site-0900/1080p.mp4" type="video/mp4" />
           </video>
