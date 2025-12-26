@@ -1,5 +1,9 @@
 import { useRef, useState } from 'react'
 import droneHero from './assets/drone-hero.png'
+import peanut_ortho from './assets/Peanut_3D_Model.jpg'
+import peanut_pc from './assets/Peanut_PointCloud_Progress.jpg'
+import peanut_pano from './assets/Peanut_Site_Pano.jpg'
+import R3FPano from './components/R3FPano'
 
 function Section({ id, title, children }) {
   return (
@@ -40,16 +44,17 @@ function Hero() {
           <h1>Precise aerial data. Clean deliverables.</h1>
           <p>
             Mapping, inspections, and 3D models for roofs, sites, and facilities.
-            Richmond, Virginia and the Mid-Atlantic.
+            Serving the Mid-Atlantic.
           </p>
           <div className="hero-ctas">
             <a href="#contact" className="cta">Request a Quote</a>
             <a href="#portfolio" className="ghost">View Work</a>
           </div>
           <ul className="badges">
-            <li>DJI Matrice 4E • Mavic 3 Pro • Air 3</li>
-            <li>D-RTK-3 capable</li>
-            <li>Part 107 Certified</li>
+            <li>RGB</li>
+            <li>Thermal</li>
+            <li>Site Progress</li>
+            <li>Volume Tracking</li>
           </ul>
         </div>
         <div className="hero-card">
@@ -73,15 +78,15 @@ function Services() {
   const items = [
     {
       title: 'Orthomosaic Mapping',
-      body: 'High-resolution stitched maps for sites, fields, and large roofs. Fast turnarounds with consistent ground sampling.',
-    },
-    {
-      title: 'Roof & Property Inspections',
-      body: 'Detailed imagery for claims, underwriting, and maintenance. Close-range captures with repeatable flight paths.',
+      body: 'High-resolution stitched maps for sites, fields, and large roofs. Fast turnarounds with consistent and high-grade ground sampling.',
     },
     {
       title: '3D Models & Facades',
       body: 'Photogrammetry models for planning and visualization. Shareable web viewers or OBJ/PLY deliverables.',
+    },
+    {
+      title: 'Roof & Property Inspections',
+      body: 'Detailed imagery for claims, underwriting, and maintenance. Close-range captures with repeatable flight paths.',
     },
     {
       title: 'Marketing Aerials',
@@ -104,10 +109,9 @@ function Services() {
 
 function Portfolio() {
   const shots = [
-    { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop', caption: 'Construction orthomosaic (sample)' },
-    { src: 'https://images.unsplash.com/photo-1531829039722-d3fb3e705a4b?q=80&w=1400&auto=format&fit=crop', caption: 'Downtown roof inspection (sample)' },
-    { src: 'https://images.unsplash.com/photo-1471802804811-04c0f5a2f4f4?q=80&w=1400&auto=format&fit=crop', caption: 'Commercial site progress (sample)' },
-    { src: 'https://images.unsplash.com/photo-1504198266285-165a10f8ec53?q=80&w=1400&auto=format&fit=crop', caption: '3D model textures (sample)' },
+  { src: peanut_ortho, caption: 'Data center; 2D orthomosaic w/ RTK (1.25 cm GSD)' },
+  { src: peanut_pc, caption: 'Data center; Point cloud' },
+
   ]
   return (
     <Section id="portfolio" title="Portfolio">
@@ -118,6 +122,10 @@ function Portfolio() {
             <figcaption>{s.caption}</figcaption>
           </figure>
         ))}
+        <figure className="tile">
+          <R3FPano src={peanut_pano} height={400} />
+          <figcaption>Data Center; Panorama, 180'</figcaption>
+        </figure>
       </div>
       <p className="note">
         Want to see live viewers (orthos/3D)? Ask in your quote request—I’ll share project links.

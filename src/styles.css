@@ -206,8 +206,8 @@ body {
 }
 
 .masonry {
-    columns: 2;
-    column-gap: 16px
+    columns: 1;
+    column-gap: 20px
 }
 
 .tile {
