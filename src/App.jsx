@@ -109,8 +109,8 @@ function Services() {
 
 function Portfolio() {
   const shots = [
-  { src: peanut_ortho, caption: 'Data center; 2D orthomosaic w/ RTK (1.25 cm GSD)' },
-  { src: peanut_pc, caption: 'Data center; Point cloud' },
+  { src: peanut_ortho, caption: '500-acre site clearing; 2D orthomosaic w/ RTK (1.25 cm GSD)' },
+  { src: peanut_pc, caption: 'Tree clearing; 3D Point cloud' },
 
   ]
   return (
@@ -124,7 +124,7 @@ function Portfolio() {
         ))}
         <figure className="tile">
           <R3FPano src={peanut_pano} height={400} />
-          <figcaption>Data Center; Panorama, 180'</figcaption>
+          <figcaption>Tree clearing mid-section; Panorama, 180'</figcaption>
         </figure>
       </div>
       <p className="note">
