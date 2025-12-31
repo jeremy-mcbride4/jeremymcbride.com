@@ -3,6 +3,7 @@ import droneHero from './assets/drone-hero.png'
 import peanut_ortho from './assets/Peanut_3D_Model.jpg'
 import peanut_pc from './assets/Peanut_PointCloud_Progress.jpg'
 import peanut_pano from './assets/Peanut_Site_Pano.jpg'
+import shopping_center_ortho from './assets/100_twentyninth_2d_ortho.jpg'
 import R3FPano from './components/R3FPano'
 
 function Section({ id, title, children }) {
@@ -111,6 +112,7 @@ function Portfolio() {
   const shots = [
   { src: peanut_ortho, caption: '500-acre site clearing; 2D orthomosaic w/ RTK (1.25 cm GSD)' },
   { src: peanut_pc, caption: 'Tree clearing; 3D Point cloud' },
+  { src: shopping_center_ortho, caption: '115-acre Shopping center roof inspection; 2D orthomosaic (1.5 cm GSD)' },
 
   ]
   return (
