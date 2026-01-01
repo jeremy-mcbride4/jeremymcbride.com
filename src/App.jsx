@@ -4,6 +4,8 @@ import peanut_ortho from './assets/Peanut_3D_Model.jpg'
 import peanut_pc from './assets/Peanut_PointCloud_Progress.jpg'
 import peanut_pano from './assets/Peanut_Site_Pano.jpg'
 import shopping_center_ortho from './assets/100_twentyninth_2d_ortho.jpg'
+import remington_point_cloud from './assets/Remington_PointCloud_Overview.jpg'
+import remington_3d_model from './assets/Remington_3D_Model.jpg'
 import R3FPano from './components/R3FPano'
 
 function Section({ id, title, children }) {
@@ -42,9 +44,9 @@ function Hero() {
     <div className="hero">
       <div className="container hero-inner">
         <div className="hero-copy">
-          <h1>Precise aerial data. Clean deliverables.</h1>
+          <h1>Precise aerial data processed into Clean deliverables.</h1>
           <p>
-            Mapping, inspections, and 3D models for roofs, sites, and facilities.
+            Mapping, inspections, and 3D models for construction, utilities, infrastructure,and large facilities.
             Serving the Mid-Atlantic.
           </p>
           <div className="hero-ctas">
@@ -52,10 +54,11 @@ function Hero() {
             <a href="#portfolio" className="ghost">View Work</a>
           </div>
           <ul className="badges">
-            <li>RGB</li>
+            <li>Optical/RGB</li>
             <li>Thermal</li>
             <li>Site Progress</li>
             <li>Volume Tracking</li>
+            <li>Deliverable Processing</li>
           </ul>
         </div>
         <div className="hero-card">
@@ -76,7 +79,7 @@ function Hero() {
 }
 
 function Services() {
-  const items = [
+  const entprise_services = [
     {
       title: 'Orthomosaic Mapping',
       body: 'High-resolution stitched maps for sites, fields, and large roofs. Fast turnarounds with consistent and high-grade ground sampling.',
@@ -90,29 +93,49 @@ function Services() {
       body: 'Detailed imagery for claims, underwriting, and maintenance. Close-range captures with repeatable flight paths.',
     },
     {
+      title: 'Image/Asset Processing',
+      body: 'Image analysis, annotation, and custom deliverables tailored to your project needs.',
+    },
+  ]
+  const other_services = [
+    {
       title: 'Marketing Aerials',
       body: 'Cinematic shots for listings and brand assets. Smooth, stabilized footage in 4K.',
     },
   ]
   return (
-    <Section id="services" title="Services">
-      <div className="grid">
-        {items.map((s) => (
-          <div className="card" key={s.title}>
-            <h3 className="h3">{s.title}</h3>
-            <p>{s.body}</p>
-          </div>
-        ))}
-      </div>
-    </Section>
+    <>
+      <Section id="enterprise_services" title="Enterprise Services">
+        <div className="grid">
+          {entprise_services.map((s) => (
+            <div className="card" key={s.title}>
+              <h3 className="h3">{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+      <Section id="other_services" title="Other Services">
+        <div className="grid">
+          {other_services.map((s) => (
+            <div className="card" key={s.title}>
+              <h3 className="h3">{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+    </>
   )
 }
 
 function Portfolio() {
   const shots = [
-  { src: peanut_ortho, caption: '500-acre site clearing; 2D orthomosaic w/ RTK (1.25 cm GSD)' },
   { src: peanut_pc, caption: 'Tree clearing; 3D Point cloud' },
-  { src: shopping_center_ortho, caption: '115-acre Shopping center roof inspection; 2D orthomosaic (1.5 cm GSD)' },
+  { src: peanut_ortho, caption: '500-acre site clearing; 2D orthomosaic w/ RTK (1.25 cm GSD)' },
+  { src: shopping_center_ortho, caption: '115-acre Shopping center; 2D orthomosaic (1.5 cm GSD)' },
+  { src: remington_point_cloud, caption: '175-acre site; 3D Point cloud' },
+  { src: remington_3d_model, caption: '175-acre site; 3D Model' },
 
   ]
   return (
@@ -141,10 +164,11 @@ function Creds() {
     <Section id="credentials" title="Credentials & Coverage">
       <ul className="cred-list">
         <li><strong>FAA Part 107</strong> Remote Pilot</li>
-        <li><strong>Insurance</strong> on request per job</li>
+        <li><strong>Insurance</strong> up to $25M</li>
         <li><strong>Service area:</strong> VA • DC • MD • NC</li>
-        <li><strong>Hardware:</strong> Matrice 4E, Mavic 3 Pro, Air 3, D-RTK-3</li>
-        <li><strong>Deliverables:</strong> Orthos (GeoTIFF/MBTiles), 3D (OBJ/PLY/WEB), reports, and raw imagery</li>
+        <li><strong>Hardware:</strong> Matrice 400, Matrice 4E, Matrice 4T, Mavic 3 Pro, Air 3, D-RTK-3, PPE</li>
+        <li><strong>Software:</strong> Pix4D, Agisoft Metashape, DroneDeploy, Terra, FlightHub 2, Litchi</li>
+        <li><strong>Deliverables:</strong> Orthos(GeoTIFF/MBTiles), 3D(OBJ/PLY/WEB) Models, Point Clouds, Customized Reports, RAW imagery</li>
       </ul>
     </Section>
   )
