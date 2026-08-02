@@ -111,7 +111,7 @@ function Services() {
       <div className="section-head">
         <h2>Services</h2>
         <p className="section-sub">
-          End-to-end aerial capture and processing for enterprise and commercial clients.
+          End-to-end aerial capture and processing for enterprise and commercial projects.
         </p>
       </div>
       <div className="services-grid">

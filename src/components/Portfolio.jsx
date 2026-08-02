@@ -17,7 +17,19 @@ import thumb_shopping from '../assets/thumbs/100_twentyninth_2d_ortho.jpg'
 import thumb_remington_pc from '../assets/thumbs/Remington_PointCloud_Overview.jpg'
 import thumb_remington_3d from '../assets/thumbs/Remington_3D_Model.jpg'
 import thumb_remington_vol from '../assets/thumbs/Remington_PointCloud_Volumetric.jpg'
+import meadowbrook_rgb from '../assets/meadowbrook_rgb.png'
+import thumb_meadowbrook_rgb from '../assets/thumbs/meadowbrook_rgb.png'
+import thumb_meadow_solar from '../assets/thumbs/meadow-solar.jpg'
+import construction1 from '../assets/site_construction_progress1.jpg'
+import construction2 from '../assets/site_construction_progress2.jpg'
+import construction3 from '../assets/site_construction_progress3.jpg'
+import thumb_construction1 from '../assets/thumbs/site_construction_progress1.jpg'
+import thumb_construction2 from '../assets/thumbs/site_construction_progress2.jpg'
+import thumb_construction3 from '../assets/thumbs/site_construction_progress3.jpg'
 import thumb_map_snapshot from '../assets/thumbs/map_snapshot.jpg'
+import map_snapshot2 from '../assets/map_snapshot2.png'
+import thumb_map_snapshot2 from '../assets/thumbs/map_snapshot2.jpg'
+import thumb_sams_overview from '../assets/thumbs/sams_overview.jpg'
 
 const CATEGORIES = [
   { key: 'all', label: 'All Projects' },
@@ -25,6 +37,7 @@ const CATEGORIES = [
   { key: 'mapping', label: 'Mapping' },
   { key: '3d', label: '3D Models' },
   { key: 'pointcloud', label: 'Point Clouds' },
+  { key: 'thermal', label: 'Thermal' },
 ]
 
 const projects = [
@@ -37,17 +50,55 @@ const projects = [
     stats: [
       { label: 'Acreage', value: '500' },
       { label: 'GSD', value: '1.25 cm' },
-      { label: 'Deliverables', value: '5' },
+      { label: 'Deliverables', value: '6' },
     ],
     description:
       'Comprehensive aerial survey of a large-scale commercial tree clearing operation. Multi-phase capture included orthomosaic mapping with RTK-enabled GPS for centimeter-level accuracy, 3D point cloud generation for volumetric analysis, and 360° panoramic documentation of site progress.',
     media: [
-      { src: '/model.glb', caption: '3D Model — Orbit to explore', type: 'model' },
+      { src: '/map-snapshot.png', thumb: thumb_map_snapshot, caption: '2D Orthomosaic Overlay (1.25 cm GSD)', type: 'image' },
       { src: peanut_3d, thumb: thumb_peanut_3d, caption: '3D Model Overview', type: 'image' },
+      { src: map_snapshot2, thumb: thumb_map_snapshot2, caption: '2D Orthomosaic Overlay — Detail', type: 'image' },
       { src: peanut_pc, thumb: thumb_peanut_pc, caption: '3D Point Cloud — Progress', type: 'image' },
       { src: peanut_pano, caption: 'Mid-Section 360° Panorama', type: 'pano' },
     ],
-    thumbnail: thumb_peanut_3d,
+    thumbnail: thumb_map_snapshot,
+  },
+  {
+    id: 'meadowbrook',
+    title: 'Solar Array Inspection',
+    subtitle: 'Thermal & RGB Orthomosaic',
+    location: 'North Carolina',
+    categories: ['mapping', 'thermal'],
+    stats: [
+      { label: 'Type', value: 'Thermal + RGB' },
+      { label: 'Deliverables', value: '2' },
+    ],
+    description:
+      'Dual-sensor orthomosaic capture of a large school campus. RGB orthophoto provides high-resolution visual reference while thermal imaging identifies heat anomalies across the roof and grounds.',
+    media: [
+      { src: '/meadow-solar.jpg', thumb: thumb_meadow_solar, caption: 'Thermal Orthomosaic', type: 'image' },
+      { src: meadowbrook_rgb, thumb: thumb_meadowbrook_rgb, caption: 'RGB Orthomosaic', type: 'image' },
+    ],
+    thumbnail: thumb_meadow_solar,
+  },
+  {
+    id: 'construction-progress',
+    title: 'Site Progress',
+    subtitle: 'Aerial Construction Documentation',
+    location: 'North Carolina',
+    categories: ['construction'],
+    stats: [
+      { label: 'Type', value: 'Progress' },
+      { label: 'Deliverables', value: '3' },
+    ],
+    description:
+      'Aerial documentation of active construction site progress. Repeatable flight paths and consistent capture angles enable clear before/after comparisons and stakeholder reporting across project phases.',
+    media: [
+      { src: construction2, thumb: thumb_construction2, caption: 'Site Progress — Overview', type: 'image' },
+      { src: construction1, thumb: thumb_construction1, caption: 'Site Progress — View 1', type: 'image' },
+      { src: construction3, thumb: thumb_construction3, caption: 'Site Progress — View 3', type: 'image' },
+    ],
+    thumbnail: thumb_construction2,
   },
   {
     id: 'remington',
@@ -71,7 +122,7 @@ const projects = [
   },
   {
     id: 'sams-club',
-    title: "Sam's Club — Smart Oblique",
+    title: "3D Smart Oblique",
     subtitle: '3D Smart Oblique Capture',
     location: 'Virginia',
     categories: ['3d'],
@@ -82,26 +133,10 @@ const projects = [
     description:
       "Smart Oblique 3D capture of a Sam's Club facility. Multi-angle drone imagery reconstructed into a fully navigable 3D model — orbit, zoom, and inspect the structure from any angle.",
     media: [
+      { src: '/sams_overview.png', thumb: thumb_sams_overview, caption: "Site Overview", type: 'image' },
       { src: '/sams-club.glb', caption: '3D Smart Oblique — Orbit to explore', type: 'model' },
     ],
-    thumbnail: thumb_remington_3d,
-  },
-  {
-    id: 'cfcrtk-ortho',
-    title: 'Large-Scale Site Clearing',
-    subtitle: '2D Orthomosaic Overlay',
-    location: 'Central Virginia',
-    categories: ['mapping'],
-    stats: [
-      { label: 'GSD', value: '1.25 cm' },
-      { label: 'Type', value: 'Ortho' },
-    ],
-    description:
-      'High-resolution 2D orthomosaic overlay of a 500-acre commercial tree clearing operation. Captured with RTK-enabled GPS for centimeter-level positional accuracy, processed into a georeferenced GeoTIFF deliverable.',
-    media: [
-      { src: '/map-snapshot.png', thumb: thumb_map_snapshot, caption: '2D Orthomosaic Overlay (1.25 cm GSD)', type: 'image' },
-    ],
-    thumbnail: thumb_map_snapshot,
+    thumbnail: thumb_sams_overview,
   },
   {
     id: 'shopping-center',
