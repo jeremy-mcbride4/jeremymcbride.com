@@ -2,17 +2,12 @@ import { useState, useEffect, useCallback, lazy, Suspense } from 'react'
 import R3FPano from './R3FPano'
 const ModelViewer = lazy(() => import('./ModelViewer'))
 
-import peanut_3d from '../assets/Peanut_3D_Model.jpg'
-import peanut_pc from '../assets/Peanut_PointCloud_Progress.jpg'
-import peanut_pano from '../assets/Peanut_Site_Pano.jpg'
 import shopping_center_ortho from '../assets/100_twentyninth_2d_ortho.jpg'
 import remington_pc from '../assets/Remington_PointCloud_Overview.jpg'
 import remington_3d from '../assets/Remington_3D_Model.jpg'
 import remington_vol from '../assets/Remington_PointCloud_Volumetric.jpg'
 import remington_pano from '../assets/Remington_Site_Pano.jpg'
 
-import thumb_peanut_3d from '../assets/thumbs/Peanut_3D_Model.jpg'
-import thumb_peanut_pc from '../assets/thumbs/Peanut_PointCloud_Progress.jpg'
 import thumb_shopping from '../assets/thumbs/100_twentyninth_2d_ortho.jpg'
 import thumb_remington_pc from '../assets/thumbs/Remington_PointCloud_Overview.jpg'
 import thumb_remington_3d from '../assets/thumbs/Remington_3D_Model.jpg'
@@ -26,9 +21,6 @@ import construction3 from '../assets/site_construction_progress3.jpg'
 import thumb_construction1 from '../assets/thumbs/site_construction_progress1.jpg'
 import thumb_construction2 from '../assets/thumbs/site_construction_progress2.jpg'
 import thumb_construction3 from '../assets/thumbs/site_construction_progress3.jpg'
-import thumb_map_snapshot from '../assets/thumbs/map_snapshot.jpg'
-import map_snapshot2 from '../assets/map_snapshot2.png'
-import thumb_map_snapshot2 from '../assets/thumbs/map_snapshot2.jpg'
 import thumb_sams_overview from '../assets/thumbs/sams_overview.jpg'
 
 const CATEGORIES = [
@@ -41,28 +33,6 @@ const CATEGORIES = [
 ]
 
 const projects = [
-  {
-    id: 'peanut',
-    title: 'Large-Scale Site Clearing',
-    subtitle: '500-Acre Survey',
-    location: 'Central Virginia',
-    categories: ['mapping', '3d', 'pointcloud'],
-    stats: [
-      { label: 'Acreage', value: '500' },
-      { label: 'GSD', value: '1.25 cm' },
-      { label: 'Deliverables', value: '6' },
-    ],
-    description:
-      'Comprehensive aerial survey of a large-scale commercial tree clearing operation. Multi-phase capture included orthomosaic mapping with RTK-enabled GPS for centimeter-level accuracy, 3D point cloud generation for volumetric analysis, and 360° panoramic documentation of site progress.',
-    media: [
-      { src: '/map-snapshot.png', thumb: thumb_map_snapshot, caption: '2D Orthomosaic Overlay (1.25 cm GSD)', type: 'image' },
-      { src: peanut_3d, thumb: thumb_peanut_3d, caption: '3D Model Overview', type: 'image' },
-      { src: map_snapshot2, thumb: thumb_map_snapshot2, caption: '2D Orthomosaic Overlay — Detail', type: 'image' },
-      { src: peanut_pc, thumb: thumb_peanut_pc, caption: '3D Point Cloud — Progress', type: 'image' },
-      { src: peanut_pano, caption: 'Mid-Section 360° Panorama', type: 'pano' },
-    ],
-    thumbnail: thumb_map_snapshot,
-  },
   {
     id: 'meadowbrook',
     title: 'Solar Array Inspection',
