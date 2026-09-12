@@ -15,12 +15,6 @@ import thumb_remington_vol from '../assets/thumbs/Remington_PointCloud_Volumetri
 import meadowbrook_rgb from '../assets/meadowbrook_rgb.png'
 import thumb_meadowbrook_rgb from '../assets/thumbs/meadowbrook_rgb.png'
 import thumb_meadow_solar from '../assets/thumbs/meadow-solar.jpg'
-import construction1 from '../assets/site_construction_progress1.jpg'
-import construction2 from '../assets/site_construction_progress2.jpg'
-import construction3 from '../assets/site_construction_progress3.jpg'
-import thumb_construction1 from '../assets/thumbs/site_construction_progress1.jpg'
-import thumb_construction2 from '../assets/thumbs/site_construction_progress2.jpg'
-import thumb_construction3 from '../assets/thumbs/site_construction_progress3.jpg'
 import thumb_sams_overview from '../assets/thumbs/sams_overview.jpg'
 
 const CATEGORIES = [
@@ -59,16 +53,12 @@ const projects = [
     categories: ['construction'],
     stats: [
       { label: 'Type', value: 'Progress' },
-      { label: 'Deliverables', value: '3' },
+      { label: 'Deliverables', value: 'Coming Soon' },
     ],
     description:
       'Aerial documentation of active construction site progress. Repeatable flight paths and consistent capture angles enable clear before/after comparisons and stakeholder reporting across project phases.',
-    media: [
-      { src: construction2, thumb: thumb_construction2, caption: 'Site Progress — Overview', type: 'image' },
-      { src: construction1, thumb: thumb_construction1, caption: 'Site Progress — View 1', type: 'image' },
-      { src: construction3, thumb: thumb_construction3, caption: 'Site Progress — View 3', type: 'image' },
-    ],
-    thumbnail: thumb_construction2,
+    media: [],
+    thumbnail: null,
   },
   {
     id: 'remington',
@@ -275,6 +265,9 @@ function ProjectModal({ project, onClose, onOpenLightbox }) {
           <p className="modal-desc">{project.description}</p>
 
           <h3 className="modal-gallery-heading">Deliverables</h3>
+          {project.media.length === 0 && (
+            <p className="modal-gallery-placeholder">Deliverables coming soon.</p>
+          )}
           <div className="modal-gallery">
             {project.media.map((item, i) =>
               item.type === 'model' ? (
@@ -362,7 +355,11 @@ export default function Portfolio() {
               onKeyDown={(e) => e.key === 'Enter' && setSelectedProject(p)}
             >
               <div className="project-thumb">
-                <img src={p.thumbnail} alt={p.title} />
+                {p.thumbnail ? (
+                  <img src={p.thumbnail} alt={p.title} />
+                ) : (
+                  <div className="project-thumb-placeholder">Coming Soon</div>
+                )}
                 <div className="project-thumb-over">
                   <span>View Project &rarr;</span>
                 </div>
