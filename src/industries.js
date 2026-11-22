@@ -38,6 +38,7 @@ export const industries = [
       'Stockpile & cut/fill volume reports',
       'Progress photo & video sets',
       '3D models and 360° site panoramas',
+      'Processed in DroneDeploy, Pix4D, or Metashape, with exports for your GIS and CAD tools',
     ],
     projectIds: ['construction-progress', 'remington'],
     service: 'Construction Progress',
