@@ -10,7 +10,7 @@ function Hero() {
       <div className="hero-bg" style={{ backgroundImage: `url(${heroBg})` }} />
       <div className="container hero-inner">
         <div className="hero-copy">
-          <h1>Aerial site data for the teams that build, own, and power the Mid-Atlantic.</h1>
+          <h1>Every acre. Every angle. Every sensor.</h1>
           <p>
             Construction progress, LiDAR and mapping, thermal inspections, and 3D models, flown and processed by an
             FAA-certified pilot based in Richmond, VA. Deliverables in the formats your team already uses.
