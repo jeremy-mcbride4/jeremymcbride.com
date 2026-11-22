@@ -1,54 +1,8 @@
-import { useRef, useState } from 'react'
-import logo from './assets/logo.jpg'
 import heroBg from './assets/Remington_PointCloud_Volumetric.jpg'
 import Portfolio from './components/Portfolio'
-
-function Section({ id, children }) {
-  return (
-    <section id={id} className="section">
-      <div className="container">{children}</div>
-    </section>
-  )
-}
-
-function Nav() {
-  const [open, setOpen] = useState(false)
-  return (
-    <header className="nav-wrap">
-      <nav className="nav container">
-        <div className="brand">
-          <img src={logo} alt="" className="brand-logo" />
-          <span className="brand-text">Jeremy McBride <span className="brand-accent">Aerial</span></span>
-        </div>
-        <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Menu">
-          ☰
-        </button>
-        <ul className={`menu ${open ? 'open' : ''}`}>
-          <li>
-            <a href="#services">Services</a>
-          </li>
-          <li>
-            <a href="#portfolio">Portfolio</a>
-          </li>
-          <li>
-            <a href="#credentials">Credentials</a>
-          </li>
-          <li className="menu-dropdown-wrap">
-            <button className="menu-dropdown-trigger">Tools</button>
-            <ul className="menu-dropdown">
-              <li><a href="https://www.droneautomator.com" target="_blank" rel="noopener noreferrer">Drone Automator</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#contact" className="cta-nav">
-              Request a Quote
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  )
-}
+import { Nav, Footer, Section } from './components/Layout'
+import { IndustryCards, HowItWorks, Proof, Pricing, Contact } from './components/Sections'
+import { useHashScroll } from './useHashScroll'
 
 function Hero() {
   return (
@@ -56,10 +10,10 @@ function Hero() {
       <div className="hero-bg" style={{ backgroundImage: `url(${heroBg})` }} />
       <div className="container hero-inner">
         <div className="hero-copy">
-          <h1>Precise aerial data processed into clean deliverables.</h1>
+          <h1>Aerial site data for the teams that build, own, and power the Mid-Atlantic.</h1>
           <p>
-            Mapping, inspections, 3D models, and progress reports, for construction, utilities, infrastructure,
-            and large facilities. Serving the Mid-Atlantic.
+            Construction progress, LiDAR and mapping, thermal inspections, and 3D models, flown and processed by an
+            FAA-certified pilot based in Richmond, VA. Deliverables in the formats your team already uses.
           </p>
           <div className="hero-ctas">
             <a href="#contact" className="cta">
@@ -70,11 +24,11 @@ function Hero() {
             </a>
           </div>
           <ul className="badges">
-            <li>Optical / RGB</li>
+            <li>LiDAR</li>
+            <li>Construction Progress</li>
             <li>Thermal</li>
-            <li>Site Progress</li>
             <li>Volume Tracking</li>
-            <li>Deliverable Processing</li>
+            <li>3D Models</li>
           </ul>
         </div>
       </div>
@@ -218,124 +172,20 @@ function Creds() {
   )
 }
 
-function Contact() {
-  const formRef = useRef(null)
-  const [status, setStatus] = useState('idle')
-
-  const onSubmit = async (e) => {
-    e.preventDefault()
-    setStatus('sending')
-
-    const endpoint = 'https://formspree.io/f/xnnzlozb'
-    const data = new FormData(formRef.current)
-
-    try {
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
-      })
-      if (res.ok) setStatus('sent')
-      else setStatus('error')
-    } catch {
-      setStatus('error')
-    }
-  }
-
-  return (
-    <Section id="contact">
-      <div className="section-head">
-        <h2>Request a Quote</h2>
-        <p className="section-sub">
-          Share your project details and I'll respond with a scope and estimate.
-        </p>
-      </div>
-      <form ref={formRef} className="form" onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="_gotcha"
-          style={{ display: 'none' }}
-          tabIndex="-1"
-          autoComplete="off"
-        />
-        <input
-          type="hidden"
-          name="_subject"
-          value="New drone quote request from jeremymcbride.com"
-        />
-
-        <div className="field">
-          <label htmlFor="name">Name</label>
-          <input id="name" name="name" placeholder="Your name" required />
-        </div>
-
-        <div className="field">
-          <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@company.com" required />
-        </div>
-
-        <div className="field">
-          <label htmlFor="service">Service</label>
-          <select id="service" name="service" defaultValue="Inspection">
-            <option>Inspection</option>
-            <option>Mapping / Orthomosaic</option>
-            <option>LiDAR</option>
-            <option>3D Model</option>
-            <option>Marketing Aerials</option>
-          </select>
-        </div>
-
-        <div className="field">
-          <label htmlFor="details">Project details</label>
-          <textarea
-            id="details"
-            name="details"
-            rows="5"
-            placeholder="Location, timeline, deliverables..."
-          />
-        </div>
-
-        <button className="cta" disabled={status === 'sending'}>
-          {status === 'sending' ? 'Sending…' : 'Send Request'}
-        </button>
-
-        {status === 'sent' && <p className="toast success">Thanks — I'll reply shortly.</p>}
-        {status === 'error' && (
-          <p className="toast error">
-            Something went wrong. Email info@jeremymcbride.com.
-          </p>
-        )}
-      </form>
-
-      <p className="contact-alt">
-        Prefer email? <a href="mailto:info@jeremymcbride.com">info@jeremymcbride.com</a>
-      </p>
-    </Section>
-  )
-}
-
-function Footer() {
-  return (
-    <footer className="footer">
-      <div className="container footer-inner">
-        <p>© {new Date().getFullYear()} Jeremy McBride Aerial · Richmond, VA</p>
-        <a className="ghost" href="#top">
-          Back to top
-        </a>
-      </div>
-    </footer>
-  )
-}
-
 export default function App() {
+  useHashScroll()
   return (
     <>
       <Nav />
       <main>
         <Hero />
+        <IndustryCards />
         <Services />
         <Portfolio />
+        <Proof />
+        <HowItWorks />
         <Creds />
+        <Pricing />
         <Contact />
       </main>
       <Footer />

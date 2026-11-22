@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from './App'
@@ -26,7 +26,7 @@ describe('App', () => {
 
   it('displays the hero section with main heading', () => {
     render(<App />)
-    expect(screen.getByRole('heading', { name: /Precise aerial data/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
   })
 
   it('shows navigation menu items', () => {
@@ -35,6 +35,7 @@ describe('App', () => {
     expect(nav).toHaveTextContent('Services')
     expect(nav).toHaveTextContent('Portfolio')
     expect(nav).toHaveTextContent('Credentials')
+    expect(nav).toHaveTextContent('Industries')
   })
 
   it('toggles mobile menu when hamburger is clicked', async () => {
@@ -153,5 +154,26 @@ describe('App', () => {
     for (const name of ['All Projects', 'Construction Progress', 'Mapping', '3D Models', 'Point Clouds', 'Thermal']) {
       expect(screen.getByRole('button', { name })).toBeInTheDocument()
     }
+  })
+
+  it('links to each industry page', () => {
+    render(<App />)
+    expect(screen.getByRole('link', { name: /Construction & Development/i })).toHaveAttribute('href', '/construction/')
+    expect(screen.getByRole('link', { name: /Solar & Energy/i })).toHaveAttribute('href', '/solar/')
+    expect(screen.getByRole('link', { name: /Commercial Property/i })).toHaveAttribute('href', '/commercial-property/')
+  })
+
+  it('hides proof and pricing sections while their config is empty', () => {
+    render(<App />)
+    expect(screen.queryByRole('heading', { name: 'Results' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Starting prices' })).not.toBeInTheDocument()
+  })
+
+  it('shows the site progress video when that project is opened', async () => {
+    const { container } = render(<App />)
+    const user = userEvent.setup()
+    await user.click(screen.getByText('Site Progress'))
+    expect(container.querySelector('video.gallery-video')).toBeInTheDocument()
+    expect(screen.queryByText(/Deliverables coming soon/i)).not.toBeInTheDocument()
   })
 })

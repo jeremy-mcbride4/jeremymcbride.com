@@ -24,3 +24,6 @@ coverage
 *.sln
 *.sw?
 .vercel
+
+# Original full-size footage (too large for the site/repo)
+src/assets/construction-site-og.mp4

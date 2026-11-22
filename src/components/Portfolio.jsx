@@ -16,6 +16,9 @@ import meadowbrook_rgb from '../assets/meadowbrook_rgb.png'
 import thumb_meadowbrook_rgb from '../assets/thumbs/meadowbrook_rgb.png'
 import thumb_meadow_solar from '../assets/thumbs/meadow-solar.jpg'
 import thumb_sams_overview from '../assets/thumbs/sams_overview.jpg'
+import construction_video from '../assets/construction-site.mp4'
+import construction_poster from '../assets/thumbs/construction-site-poster.jpg'
+import thumb_progress1 from '../assets/thumbs/site_construction_progress1.jpg'
 
 const CATEGORIES = [
   { key: 'all', label: 'All Projects' },
@@ -26,6 +29,8 @@ const CATEGORIES = [
   { key: 'thermal', label: 'Thermal' },
 ]
 
+// Optional per-project field: `result` — one or two sentences on the outcome for the
+// client (what it saved, caught, or enabled). Shown as "Outcome" in the project view.
 const projects = [
   {
     id: 'meadowbrook',
@@ -53,12 +58,17 @@ const projects = [
     categories: ['construction'],
     stats: [
       { label: 'Type', value: 'Progress' },
-      { label: 'Deliverables', value: 'Coming Soon' },
+      { label: 'Deliverables', value: '4' },
     ],
     description:
       'Aerial documentation of active construction site progress. Repeatable flight paths and consistent capture angles enable clear before/after comparisons and stakeholder reporting across project phases.',
-    media: [],
-    thumbnail: null,
+    media: [
+      { src: construction_video, poster: construction_poster, caption: 'Progress Flyover', type: 'video' },
+      { src: '/site_construction_progress1.JPG', caption: 'Site Overview', type: 'image' },
+      { src: '/site_construction_progress2.JPG', caption: 'Progress Oblique', type: 'image' },
+      { src: '/site_construction_progress3.JPG', caption: 'Staging & Parking', type: 'image' },
+    ],
+    thumbnail: thumb_progress1,
   },
   {
     id: 'remington',
@@ -264,13 +274,33 @@ function ProjectModal({ project, onClose, onOpenLightbox }) {
 
           <p className="modal-desc">{project.description}</p>
 
+          {project.result && (
+            <div className="modal-result">
+              <span className="modal-result-lbl">Outcome</span>
+              <p>{project.result}</p>
+            </div>
+          )}
+
           <h3 className="modal-gallery-heading">Deliverables</h3>
           {project.media.length === 0 && (
             <p className="modal-gallery-placeholder">Deliverables coming soon.</p>
           )}
           <div className="modal-gallery">
             {project.media.map((item, i) =>
-              item.type === 'model' ? (
+              item.type === 'video' ? (
+                <div key={i} className="gallery-pano">
+                  <video
+                    className="gallery-video"
+                    src={item.src}
+                    poster={item.poster}
+                    controls
+                    muted
+                    playsInline
+                    preload="none"
+                  />
+                  <p className="gallery-caption">{item.caption}</p>
+                </div>
+              ) : item.type === 'model' ? (
                 <div key={i} className="gallery-pano">
                   <Suspense fallback={<div className="model-loader"><p className="model-loader-text">Loading viewer…</p></div>}>
                     <ModelViewer url={item.src} height={450} />
@@ -315,35 +345,40 @@ function ProjectModal({ project, onClose, onOpenLightbox }) {
   )
 }
 
-export default function Portfolio() {
+// `projectIds`: show only these projects, without the filter bar (used on industry pages).
+export default function Portfolio({ projectIds, heading = 'Portfolio', sub }) {
   const [filter, setFilter] = useState('all')
   const [selectedProject, setSelectedProject] = useState(null)
   const [lightbox, setLightbox] = useState(null)
 
-  const filtered =
-    filter === 'all' ? projects : projects.filter((p) => p.categories.includes(filter))
+  const pool = projectIds
+    ? projectIds.map((id) => projects.find((p) => p.id === id)).filter(Boolean)
+    : projects
+  const filtered = filter === 'all' ? pool : pool.filter((p) => p.categories.includes(filter))
 
   return (
     <section id="portfolio" className="section section-portfolio">
       <div className="container">
         <div className="section-head">
-          <h2>Portfolio</h2>
+          <h2>{heading}</h2>
           <p className="section-sub">
-            Select a project to explore deliverables and interactive viewers.
+            {sub || 'Select a project to explore deliverables and interactive viewers.'}
           </p>
         </div>
 
-        <div className="filter-bar">
-          {CATEGORIES.map((c) => (
-            <button
-              key={c.key}
-              className={`filter-btn${filter === c.key ? ' active' : ''}`}
-              onClick={() => setFilter(c.key)}
-            >
-              {c.label}
-            </button>
-          ))}
-        </div>
+        {!projectIds && (
+          <div className="filter-bar">
+            {CATEGORIES.map((c) => (
+              <button
+                key={c.key}
+                className={`filter-btn${filter === c.key ? ' active' : ''}`}
+                onClick={() => setFilter(c.key)}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="project-grid" key={filter}>
           {filtered.map((p) => (
