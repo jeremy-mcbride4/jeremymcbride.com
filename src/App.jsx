@@ -85,8 +85,12 @@ function Hero() {
 function Services() {
   const services = [
     {
-      title: 'Orthomosaic Mapping',
+      title: 'Mapping',
       body: 'High-resolution stitched maps for sites, fields, and large roofs. Fast turnarounds with consistent, high-grade ground sampling.',
+    },
+    {
+      title: 'LiDAR',
+      body: 'Dense, survey-grade point clouds that capture terrain even under vegetation. Ideal for topography, volumes, and corridor mapping. Delivered as LAS/LAZ.',
     },
     {
       title: '3D Models & Facades',
@@ -275,6 +279,7 @@ function Contact() {
           <select id="service" name="service" defaultValue="Inspection">
             <option>Inspection</option>
             <option>Mapping / Orthomosaic</option>
+            <option>LiDAR</option>
             <option>3D Model</option>
             <option>Marketing Aerials</option>
           </select>

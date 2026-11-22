@@ -52,7 +52,8 @@ describe('App', () => {
 
   it('displays all enterprise services', () => {
     render(<App />)
-    expect(screen.getByText('Orthomosaic Mapping')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Mapping' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'LiDAR' })).toBeInTheDocument()
     expect(screen.getByText('3D Models & Facades')).toBeInTheDocument()
     expect(screen.getByText('Roof & Property Inspections')).toBeInTheDocument()
     expect(screen.getByText('Image/Asset Processing')).toBeInTheDocument()
