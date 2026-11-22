@@ -12,6 +12,11 @@ vi.mock('./components/R3FPano', () => ({
   ),
 }))
 
+// Mock the ModelViewer component (also Three.js/WebGL)
+vi.mock('./components/ModelViewer', () => ({
+  default: ({ url }) => <div data-testid="model-viewer" data-url={url}>Mocked ModelViewer</div>,
+}))
+
 describe('App', () => {
   it('renders without crashing', () => {
     render(<App />)
@@ -56,7 +61,7 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: 'LiDAR' })).toBeInTheDocument()
     expect(screen.getByText('3D Models & Facades')).toBeInTheDocument()
     expect(screen.getByText('Roof & Property Inspections')).toBeInTheDocument()
-    expect(screen.getByText('Image/Asset Processing')).toBeInTheDocument()
+    expect(screen.getByText('Image / Asset Processing')).toBeInTheDocument()
   })
 
   it('displays marketing aerials service', () => {
@@ -69,23 +74,27 @@ describe('App', () => {
     render(<App />)
     expect(screen.getByRole('heading', { name: /Portfolio/i })).toBeInTheDocument()
     
-    // Check for some portfolio captions
-    expect(screen.getByText(/Tree clearing; 3D Point cloud/i)).toBeInTheDocument()
-    expect(screen.getByText(/500-acre site clearing/i)).toBeInTheDocument()
+    // Check for some portfolio project titles
+    expect(screen.getByText('Mixed-Use Development')).toBeInTheDocument()
+    expect(screen.getByText('Commercial Property Survey')).toBeInTheDocument()
   })
 
-  it('renders the R3FPano component in portfolio', () => {
+  it('renders the R3FPano component when a project with a panorama is opened', async () => {
     render(<App />)
-    const pano = screen.getByTestId('r3f-pano')
-    expect(pano).toBeInTheDocument()
-    expect(pano).toHaveAttribute('data-height', '400')
+    const user = userEvent.setup()
+    expect(screen.queryByTestId('r3f-pano')).not.toBeInTheDocument()
+
+    await user.click(screen.getByText('Mixed-Use Development'))
+
+    const pano = await screen.findByTestId('r3f-pano')
+    expect(pano).toHaveAttribute('data-height', '320')
   })
 
   it('displays credentials section', () => {
     render(<App />)
     expect(screen.getByRole('heading', { name: /Credentials & Coverage/i })).toBeInTheDocument()
     expect(screen.getByText(/FAA Part 107/i)).toBeInTheDocument()
-    expect(screen.getByText(/Service area:/i)).toBeInTheDocument()
+    expect(screen.getByText('VA · DC · MD · NC')).toBeInTheDocument()
   })
 
   describe('Contact Form', () => {
@@ -127,7 +136,7 @@ describe('App', () => {
     render(<App />)
     const currentYear = new Date().getFullYear()
     expect(screen.getByText(new RegExp(`© ${currentYear}`, 'i'))).toBeInTheDocument()
-    expect(screen.getByText(/Jeremy McBride Aerial • Richmond, VA/i)).toBeInTheDocument()
+    expect(screen.getByText(/Jeremy McBride Aerial · Richmond, VA/i)).toBeInTheDocument()
   })
 
   it('has CTA buttons linking to contact section', () => {
@@ -139,11 +148,10 @@ describe('App', () => {
     })
   })
 
-  it('displays service area badges', () => {
+  it('displays portfolio filter buttons', () => {
     render(<App />)
-    expect(screen.getByText('Optical/RGB')).toBeInTheDocument()
-    expect(screen.getByText('Thermal')).toBeInTheDocument()
-    expect(screen.getByText('Site Progress')).toBeInTheDocument()
-    expect(screen.getByText('Volume Tracking')).toBeInTheDocument()
+    for (const name of ['All Projects', 'Construction Progress', 'Mapping', '3D Models', 'Point Clouds', 'Thermal']) {
+      expect(screen.getByRole('button', { name })).toBeInTheDocument()
+    }
   })
 })
